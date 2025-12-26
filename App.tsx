@@ -3,9 +3,9 @@ import React, { useState, useRef } from 'react';
 import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { Heart, Lock, Sparkles, ChevronDown } from 'lucide-react';
 import confetti from 'canvas-confetti';
-import FloatingHearts from './components/FloatingHearts';
-import MusicToggle, { MusicToggleHandle } from './components/MusicToggle';
-import { MEMORIES, SPECIAL_REASONS, BIRTHDAY_MESSAGE } from './constants';
+import FloatingHearts from './components/FloatingHearts.tsx';
+import MusicToggle, { MusicToggleHandle } from './components/MusicToggle.tsx';
+import { MEMORIES, SPECIAL_REASONS, BIRTHDAY_MESSAGE } from './constants.ts';
 
 const LoveNote: React.FC<{ emoji: string; line: string; index: number }> = ({ emoji, line, index }) => {
   const x = useMotionValue(0);
@@ -78,13 +78,11 @@ const App: React.FC = () => {
     setIsStarted(true);
     
     // 1. Play a sweet Birthday Chime (Music Box Style)
-    // Using a reliable public URL for a "Happy Birthday" music box segment
     const birthdayChime = new Audio('https://cdn.pixabay.com/audio/2022/03/15/audio_51c6e149c4.mp3');
     birthdayChime.volume = 0.6;
     birthdayChime.play().catch(e => console.log("Audio interaction required", e));
 
-    // 2. Play 'Dooron Dooron' style background music after the chime finishes
-    // We start it after 3.5 seconds to ensure the chime is heard clearly first
+    // 2. Play background music after the chime
     setTimeout(() => {
       musicRef.current?.playMusic();
     }, 3500);
